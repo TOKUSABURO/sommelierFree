@@ -10,9 +10,9 @@ class User < ActiveRecord::Base
   has_many :questions, -> { where(anonymous: false) }, foreign_key: :author_id, dependent: :destroy
   has_many :subscriptions, foreign_key: :subscriber_id, dependent: :destroy
 
-  has_reputation :answer_points, source: { reputation: :votes, of: :answers, weight: Rails.application.secrets.points['answer'] }
-  has_reputation :question_points, source: { reputation: :votes, of: :questions, weight: Rails.application.secrets.points['question'] }
-  has_reputation :star_points, source: { reputation: :stars, of: :questions, weight: Rails.application.secrets.points['star'] }
+  has_reputation :answer_points, source: { reputation: :votes, of: :answers }# , weight: Rails.application.secrets.points['answer'] }
+  has_reputation :question_points, source: { reputation: :votes, of: :questions }# , weight: Rails.application.secrets.points['question'] }
+  has_reputation :star_points, source: { reputation: :stars, of: :questions }# , weight: Rails.application.secrets.points['star'] }
   has_reputation :bonus_points, source: :user
   has_reputation :points, source: [
     { reputation: :answer_points },
