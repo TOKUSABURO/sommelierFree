@@ -10,6 +10,10 @@ Rails.application.routes.draw do
     post  'register' => 'devise/registrations#create', as: :user_registration
   end
 
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: "/letter_opener"
+  end
+
   concern :votable do
     member do
       post :upvote
